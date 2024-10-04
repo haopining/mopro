@@ -4,6 +4,8 @@ pub mod app_config;
 mod circom;
 #[cfg(feature = "halo2")]
 mod halo2;
+#[cfg(feature = "binius")]
+mod binius;
 
 #[cfg(feature = "circom")]
 pub use circom::{
@@ -67,6 +69,8 @@ macro_rules! halo2_app {
     };
 }
 
+
+
 use thiserror::Error;
 
 #[derive(Debug, Error)]
@@ -75,6 +79,8 @@ pub enum MoproError {
     CircomError(String),
     #[error("Halo2Error: {0}")]
     Halo2Error(String),
+    #[error("GKRError: {0}")]
+    GKRError(String),
 }
 
 #[derive(Debug, Clone)]
@@ -137,6 +143,16 @@ pub struct ProofCalldata {
 /// // Add `Fibonacci` circuit to verify proofs
 // mopro_ffi::set_halo2_verifying_circuits!("fibonacci_vk.bin", FibonacciMoproCircuit::verify);
 ///
+/// # GKR Example
+/// ```ignore
+/// // Setup the Mopro FFI library
+/// mopro_ffi::app!();
+///
+/// // Add `keccak256` circuit to generate proofs
+/// mopro_ffi::set_gkr_circuits!("keccak256", keccak256_prove, keccak256_verify);
+/// ```
+/// 
+/// 
 ///
 #[macro_export]
 macro_rules! app {
@@ -147,6 +163,8 @@ macro_rules! app {
         mopro_ffi::circom_app!();
 
         mopro_ffi::halo2_app!();
+
+        // mopro_ffi::gkr_app!();
 
         uniffi::include_scaffolding!("mopro");
     };
