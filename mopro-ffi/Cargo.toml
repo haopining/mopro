@@ -91,3 +91,6 @@ halo2-fibonacci = { git = "https://github.com/ElusAegis/halo2-fibonacci-sample.g
 # GKR dependencies
 gkr = { git = "https://github.com/han0110/gkr.git", branch = "main" }
 gkr-gadget = { git = "https://github.com/han0110/gkr", branch = "main" }
+
+# Binius dependencies
+binius-sha256 = { git = "https://gitlab.com/binius/examples/sha256.git" }

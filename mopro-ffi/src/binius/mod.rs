@@ -74,7 +74,7 @@ mod test {
     binius_app!();
 
     set_binius_circuits! {
-        ("keccak256", binius_keccak256::prove, binius_keccak256::verify),
+        ("sha256", binius_sha256::prove, binius_sha256::verify),
     }
 
     #[test]
@@ -84,9 +84,9 @@ mod test {
             0, 0, 0, 0, 0, 0,
         ];
 
-        if let Ok(proof_result) = generate_binius_proof("keccak256".to_string(), input.clone()) {
+        if let Ok(proof_result) = generate_binius_proof("sha256".to_string(), input.clone()) {
             let result = verify_binius_proof(
-                "keccak256".to_string(),
+                "sha256".to_string(),
                 input,
                 proof_result.output_claims,
                 proof_result.proof,
